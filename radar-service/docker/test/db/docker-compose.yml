@@ -1,0 +1,14 @@
+# Database container for running tests locally.
+# Author - Romit Saxena.
+version: '3'
+
+services:
+  radar-service-db:
+    container_name: radar-service-db
+    image: postgres:12.7
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: radar_service
+      POSTGRES_HOST_AUTH_METHOD: trust
