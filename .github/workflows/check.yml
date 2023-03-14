@@ -1,8 +1,25 @@
-name: Build
+name: Check radar Service
+# on:
+#   push:
+#     branches:
+#       - master
 on:
+  pull_request:
+    branches:
+      - develop
+    paths:
+      - 'radar-service/**/*'
   push:
     branches:
-      - master 
+      - develop
+    paths:
+      - 'radar-service/**/*' 
+
+env:
+  ORG: knoldus Inc
+  PROJECT_NAME: knoldus-leaderboard
+  AUTHOR: MuZakkir Saifi(muzakkirsaifi123)
+  
 jobs:
   build:
     name: Checks for radar-service
