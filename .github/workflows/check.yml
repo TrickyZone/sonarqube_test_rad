@@ -6,12 +6,12 @@ name: Check radar Service
 on:
   pull_request:
     branches:
-      - develop
+      - master
     paths:
       - 'radar-service/**/*'
   push:
     branches:
-      - develop
+      - master
     paths:
       - 'radar-service/**/*' 
 
@@ -19,7 +19,7 @@ env:
   ORG: knoldus Inc
   PROJECT_NAME: knoldus-leaderboard
   AUTHOR: MuZakkir Saifi(muzakkirsaifi123)
-  
+
 jobs:
   build:
     name: Checks for radar-service
