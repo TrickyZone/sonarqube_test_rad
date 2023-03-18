@@ -1,0 +1,96 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.3'
+	id 'org.sonarqube' version '3.1.1'
+	id 'jacoco'
+}
+apply from: 'libraries.gradle'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.knoldus'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '11'
+targetCompatibility = 11
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// Spring dependencies
+	implementation(libraries.springBootStarterWeb)
+	implementation(libraries.springBootActuator)
+	implementation(libraries.springBootStarterValidation)
+
+	// Database dependencies
+	implementation(libraries.springBootStarterJPA)
+	implementation(libraries.hikari)
+	implementation(libraries.liquibase)
+	runtimeOnly(libraries.postgresql)
+
+	// Apache dependencies
+	implementation(libraries.apacheValidator)
+	implementation(libraries.tomcat)
+	implementation(libraries.apacheCommon)
+
+	// ApiDocs dependencies
+	implementation(libraries.springFoxStarter)
+	implementation(libraries.springFoxExamples)
+
+	// Test
+	testImplementation(libraries.springBootStarterTest)
+	testImplementation(libraries.springSecurityTest)
+	testImplementation(libraries.jUnit5Api)
+	testRuntimeOnly(libraries.jUnit5Engine)
+	testImplementation(libraries.mockitoJunit5)
+
+	// Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+}
+
+jacocoTestReport {
+	executionData.setFrom(fileTree("$buildDir/jacoco/").include("**.exec"))
+	classDirectories.setFrom(files(project.sourceSets.main.output))
+
+	reports {
+		html.enabled true
+		xml.enabled true
+	}
+}
+
+sonarqube {
+	properties {
+		property "sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml"
+	}
+}
+
+task unitTest(type: Test) {
+	useJUnitPlatform {
+		include '**/*UTest.class'
+	}
+	failFast = true
+}
+
+task integrationTest(type: Test) {
+	useJUnitPlatform {
+		include '**/*ITest.class'
+	}
+	failFast = true
+}
+
+task apiTest(type: Test) {
+	useJUnitPlatform {
+		include '**/*ApiTest.class'
+	}
+	failFast = true
+}
+
+bootRun {
+	// The profile can be passed as ./gradlew clean bootRun -Dspring.profiles.active=dev
+	systemProperties['spring.profiles.active']=project.gradle.startParameter.systemPropertiesArgs['spring.profiles.active']
+}
