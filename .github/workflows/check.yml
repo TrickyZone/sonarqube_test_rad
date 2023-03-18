@@ -7,6 +7,7 @@ on:
       - 'radar-service/**/*'
   push:
     branches:
+<<<<<<< HEAD
       - master
     paths:
       - 'radar-service/**/*' 
@@ -16,15 +17,24 @@ env:
   PROJECT_NAME: knoldus-leaderboard
   AUTHOR: MuZakkir Saifi(muzakkirsaifi123)
 
+=======
+      - master # the name of your main branch
+  pull_request:
+    types: [opened, synchronize, reopened]
+>>>>>>> parent of 8c90236 (adding github action)
 jobs:
   build:
-    name: Checks for radar-service
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
+<<<<<<< HEAD
           fetch-depth: 0 
           
+=======
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+>>>>>>> parent of 8c90236 (adding github action)
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -47,8 +57,7 @@ jobs:
       - name: Build and analyze
         working-directory: radar-service/
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
-        # run: ./gradlew build sonar --info -Dsonar.projectKey=gradle-checks
-        run: ./gradlew build sonar --info -Dsonar.projectKey=${{ secrets.PROJECT_KEY }}
+        run: ./gradlew build sonar --info -Dsonar.projectKey=gradle-checks

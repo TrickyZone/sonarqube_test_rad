@@ -1,3 +1,0 @@
-name,ring,quadrant,isNew,description,studio,quarter,active
-"TeamCity",hold,"Tools",true,"TeamCity is our default build system.",scala,Q1,false
-"Automated code style settings",trial,"Techniques",true,"Codebases should be formatted consistently. Automated code-style settings achieve this without fuss."
