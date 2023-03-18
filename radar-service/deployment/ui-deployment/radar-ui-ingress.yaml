@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radar-ui
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: radar.qa.knoldus.com
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: radar-ui
+            port:
+              number: 80

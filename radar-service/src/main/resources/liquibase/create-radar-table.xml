@@ -1,0 +1,29 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <changeSet id="2" author="Naveen">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="technology"/>
+      </not>
+    </preConditions>
+    <sql>
+      CREATE TABLE public.technology (
+      id uuid NOT NULL,
+      active bool NULL,
+      description varchar(5000) NULL,
+      is_new bool NULL,
+      "name" varchar(255) NULL,
+      quadrant varchar(255) NULL,
+      quarter varchar(255) NULL,
+      ring varchar(255) NULL,
+      studio varchar(255) NULL,
+      "year" varchar(255) NULL,
+      CONSTRAINT technology_pkey PRIMARY KEY (id)
+      );
+    </sql>
+  </changeSet>
+
+</databaseChangeLog>
