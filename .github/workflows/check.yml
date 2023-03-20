@@ -1,15 +1,16 @@
 name: Check radar Service
-on:
-  pull_request:
-    branches:
-      - master
-    paths:
-      - 'radar-service/**/*'
-  push:
-    branches:
-      - master
-    paths:
-      - 'radar-service/**/*' 
+on: workflow_dispatch
+# on:
+#   pull_request:
+#     branches:
+#       - master
+#     paths:
+#       - 'radar-service/**/*'
+#   push:
+#     branches:
+#       - master
+#     paths:
+#       - 'radar-service/**/*' 
 
 env:
   ORG: knoldus Inc
