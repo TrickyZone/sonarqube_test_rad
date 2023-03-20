@@ -55,6 +55,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         
         run: |
-          ./gredlew test
+          ./gradlew test
           ./gradlew jacocoTestReport
-          ./gradlew build sonar --info -Dsonar.projectKey=gradle-checks
+          ./gradlew build sonar --info -Dsonar.projectKey=${{ secrets.PROJECT_KEY }}
