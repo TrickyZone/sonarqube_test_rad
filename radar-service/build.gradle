@@ -53,6 +53,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 }
 
+test{
+	useJUnitPlatform()
+}
+
 jacocoTestReport {
 	executionData.setFrom(fileTree("$buildDir/jacoco/").include("**.exec"))
 	classDirectories.setFrom(files(project.sourceSets.main.output))
