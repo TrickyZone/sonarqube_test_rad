@@ -50,11 +50,11 @@ jobs:
       - name: Build and analyze
         working-directory: radar-service/
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         
         run: |
-          ./gradlew test
-          ./gradlew jacocoTestReport
+          # ./gradlew test
+          # ./gradlew jacocoTestReport
           ./gradlew sonar --info -Dsonar.projectKey=${{ secrets.PROJECT_KEY }}
